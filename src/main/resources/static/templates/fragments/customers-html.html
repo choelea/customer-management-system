@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="bi bi-people-fill me-2"></i>
+                            <span th:if="${editing}">Edit Customer</span>
+                            <span th:unless="${editing}">Add New Customer</span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/customers}" th:object="${customer}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerName" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="customerName" th:field="*{customerName}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerDatabaseName" class="form-label">Customer Database Name</label>
+                                    <input type="text" class="form-control" id="customerDatabaseName" th:field="*{customerDatabaseName}" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="expirationDate" class="form-label">Expiration Date</label>
+                                    <input type="date" class="form-control" id="expirationDate" th:field="*{expirationDate}" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="fee" class="form-label">Fee</label>
+                                    <input type="number" step="0.01" class="form-control" id="fee" th:field="*{fee}" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="databaseInstanceName" class="form-label">Database Instance Name</label>
+                                    <input type="text" class="form-control" id="databaseInstanceName" th:field="*{databaseInstanceName}" required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="/customers" class="btn btn-secondary me-2" th:if="${editing}">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mt-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-table me-2"></i>
+                            Customer List
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Database Name</th>
+                                        <th>Expiration Date</th>
+                                        <th>Fee</th>
+                                        <th>Instance Name</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="cust : ${customers}" th:class="${cust.disabled ? 'table-danger' : ''}">
+                                        <td th:text="${cust.customerName}"></td>
+                                        <td th:text="${cust.customerDatabaseName}"></td>
+                                        <td th:text="${#temporals.format(cust.expirationDate, 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${cust.fee}"></td>
+                                        <td th:text="${cust.databaseInstanceName}"></td>
+                                        <td>
+                                            <span th:if="${cust.disabled}" class="badge bg-danger">Disabled</span>
+                                            <span th:unless="${cust.disabled}" class="badge bg-success">Active</span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a th:href="@{/customers/{id}/edit(id=${cust.id})}" class="btn btn-primary">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a th:if="${cust.disabled}" th:href="@{/customers/{id}/enable(id=${cust.id})}" class="btn btn-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </a>
+                                                <a th:unless="${cust.disabled}" th:href="@{/customers/{id}/disable(id=${cust.id})}" class="btn btn-warning">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </a>
+                                                <a th:href="@{/customers/{id}/delete(id=${cust.id})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this customer?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${customers.empty}">
+                                        <td colspan="7" class="text-center">No customers found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
