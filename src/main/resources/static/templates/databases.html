@@ -11,8 +11,8 @@
                     <div class="card-header bg-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
                             <i class="bi bi-hdd-stack-fill me-2"></i>
-                            <span th:if="${editing}">Edit Database</span>
-                            <span th:unless="${editing}">Add New Database</span>
+                            <span th:if="${editing}">编辑数据库实例</span>
+                            <span th:unless="${editing}">添加新的实例</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -20,31 +20,31 @@
                             <input type="hidden" th:field="*{id}">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="databaseName" class="form-label">Database Name</label>
+                                    <label for="databaseName" class="form-label">实例名称</label>
                                     <input type="text" class="form-control" id="databaseName" th:field="*{databaseName}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="address" class="form-label">Server Address</label>
+                                    <label for="address" class="form-label">IP 地址</label>
                                     <input type="text" class="form-control" id="address" th:field="*{address}" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="port" class="form-label">Port</label>
+                                    <label for="port" class="form-label">端口</label>
                                     <input type="number" class="form-control" id="port" th:field="*{port}" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="username" class="form-label">Username</label>
+                                    <label for="username" class="form-label">用户名</label>
                                     <input type="text" class="form-control" id="username" th:field="*{username}" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="password" class="form-label">Password</label>
+                                    <label for="password" class="form-label">密码</label>
                                     <input type="password" class="form-control" id="password" th:field="*{password}" required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="/databases" class="btn btn-secondary me-2" th:if="${editing}">Cancel</a>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a href="/databases" class="btn btn-secondary me-2" th:if="${editing}">取消</a>
+                                <button type="submit" class="btn btn-primary">保存</button>
                             </div>
                         </form>
                     </div>
@@ -62,11 +62,12 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Database Name</th>
-                                        <th>Server Address</th>
-                                        <th>Port</th>
-                                        <th>Username</th>
-                                        <th>Actions</th>
+                                        <th>实例名</th>
+                                        <th>IP地址</th>
+                                        <th>端口</th>
+                                        <th>用户名</th>
+                                        <th>密码</th>
+                                        <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,6 +76,7 @@
                                         <td th:text="${db.address}"></td>
                                         <td th:text="${db.port}"></td>
                                         <td th:text="${db.username}"></td>
+                                        <td th:text="${db.password}"></td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <a th:href="@{/databases/{id}/edit(id=${db.id})}" class="btn btn-primary">

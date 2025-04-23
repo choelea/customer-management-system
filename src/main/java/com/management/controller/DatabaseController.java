@@ -8,7 +8,7 @@ package com.management.controller;
  */
 
 import com.management.model.Database;
-import com.management.service.DatabaseService;
+import com.management.service.DatabaseInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +21,10 @@ import java.util.Optional;
 @RequestMapping("/databases")
 public class DatabaseController {
 
-    private final DatabaseService databaseService;
+    private final DatabaseInstanceService databaseService;
 
     @Autowired
-    public DatabaseController(DatabaseService databaseService) {
+    public DatabaseController(DatabaseInstanceService databaseService) {
         this.databaseService = databaseService;
     }
 
