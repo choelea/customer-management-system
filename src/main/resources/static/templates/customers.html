@@ -23,12 +23,13 @@
                                     <label for="customerName" class="form-label">客户名</label>
                                     <input type="text" class="form-control" id="customerName" th:field="*{customerName}" required>
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="databaseInstanceName" class="form-label">数据库实例</label>
+                                    <input type="text" class="form-control" id="databaseInstanceName" th:field="*{databaseInstanceName}" required>
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="customerDatabaseName" class="form-label">数据库名</label>
-                                    <select class="form-select" id="customerDatabaseName" th:field="*{customerDatabaseName}" required>
-                                        <option value="" disabled selected>请选择数据库名</option>
-                                        <option th:each="dbName : ${databaseNames}" th:value="${dbName}" th:text="${dbName}"></option>
-                                    </select>
+                                    <input type="text" class="form-control" id="customerDatabaseName" th:field="*{customerDatabaseName}" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -39,10 +40,6 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="fee" class="form-label">费用</label>
                                     <input type="number" step="0.01" class="form-control" id="fee" th:field="*{fee}" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="databaseInstanceName" class="form-label">数据库实例</label>
-                                    <input type="text" class="form-control" id="databaseInstanceName" th:field="*{databaseInstanceName}" required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">

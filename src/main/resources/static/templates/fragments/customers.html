@@ -25,10 +25,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="customerDatabaseName" class="form-label">数据库名</label>
-                                    <select class="form-select" id="customerDatabaseName" th:field="*{customerDatabaseName}" required>
-                                        <option value="" disabled selected>请选择数据库名</option>
-                                        <option th:each="dbName : ${databaseNames}" th:value="${dbName}" th:text="${dbName}"></option>
-                                    </select>
+                                    <input type="text" class="form-control" id="customerDatabaseName" th:field="*{customerDatabaseName}" required>
                                 </div>
                             </div>
                             <div class="row">
