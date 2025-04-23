@@ -25,8 +25,24 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    /**
+     * 查询所有客户，到期时间倒序排序
+     * @return
+     */
     public List<Customer> findAllCustomers() {
-        return customerRepository.findAll();
+        List<Customer> customers = customerRepository.findAll();
+        customers.sort((c1, c2) -> {
+            if (c1.getExpirationDate() == null && c2.getExpirationDate() == null) {
+                return 0;
+            } else if (c1.getExpirationDate() == null) {
+                return 1;
+            } else if (c2.getExpirationDate() == null) {
+                return -1;
+            } else {
+                return c2.getExpirationDate().compareTo(c1.getExpirationDate());
+            }
+        });
+        return customers;
     }
 
     public Optional<Customer> findCustomerById(Long id) {

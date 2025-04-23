@@ -40,6 +40,7 @@ public class Customer {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", timezone = "GMT+8")
     private LocalDateTime expirationDate;
 
+
     @Column(name = "fee", nullable = false)
     private Integer fee;
 

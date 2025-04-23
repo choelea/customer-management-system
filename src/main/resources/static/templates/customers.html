@@ -75,7 +75,7 @@
                                     <tr th:each="cust : ${customers}" th:class="${cust.disabled ? 'table-danger' : ''}">
                                         <td th:text="${cust.customerName}"></td>
                                         <td th:text="${cust.customerDatabaseName}"></td>
-                                        <td th:text="${#temporals.format(cust.expirationDate, 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${#temporals.format(cust.expirationDate, 'yyyy-MM-dd HH:mm')}"></td>
                                         <td th:text="${cust.fee}"></td>
                                         <td th:text="${cust.databaseInstanceName}"></td>
                                         <td>
