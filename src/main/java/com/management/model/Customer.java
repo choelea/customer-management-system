@@ -40,12 +40,14 @@ public class Customer {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", timezone = "GMT+8")
     private LocalDateTime expirationDate;
 
-
     @Column(name = "fee", nullable = false)
     private Integer fee;
 
     @Column(name = "database_instance_name", nullable = false)
     private String databaseInstanceName;
+
+    @ManyToOne
+    private Database database;
 
     @Column(name = "disabled", nullable = false)
     private boolean disabled = false;
